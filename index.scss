@@ -18,16 +18,16 @@ $navbar-dropdown-offset: 0px;
 @import "./bulma/bulma.sass";
 
 .page-content {
-	.container {
-		@extend .content;
+	.content {
+		@extend .container;
 
-		@media screen and (min-width: 1024px) {
-			max-width: 80%;
-		}
-
-		@media screen and (max-width: 1024px) {
+		@include touch {
 			padding-left: 32px;
 			padding-right: 32px;
+		}
+
+		@include desktop {
+			max-width: 850px !important;
 		}
 
 		padding-top: 32px;
@@ -56,7 +56,7 @@ $navbar-dropdown-offset: 0px;
 	align-items: center;
 	justify-content: center;
 
-	@media screen and (max-width: 1024px) {
+	@include touch {
 		padding-left: 1.9rem;
 		padding-right: 1.9rem;
 	}
@@ -77,7 +77,7 @@ $navbar-dropdown-offset: 0px;
 	align-items: center;
 	display: flex;
 
-	@media screen and (max-width: 1024px) {
+	@include touch {
 		padding-left: 32px;
 		padding-right: 32px;
 	}
@@ -94,10 +94,10 @@ $navbar-dropdown-offset: 0px;
 }
 
 .image-controls.forward {
-	@media screen and (max-width: 1024px) {
+	@include touch {
 		right: 1.5rem;
 	}
-	@media screen and (min-width: 1024px) {
+	@include desktop {
 		right: 32px;
 	}
 }
