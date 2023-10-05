@@ -10,5 +10,8 @@ build: source
 run: build
 	./main
 
+deploy: run
+	zip -r build.zip build
+
 clean:
 	rm -r ./main ./build
