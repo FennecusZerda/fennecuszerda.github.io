@@ -76,10 +76,12 @@ $navbar-dropdown-offset: 0px;
 	cursor: grab;
 	align-items: center;
 	display: flex;
+	height: 80vh;
 
 	@include touch {
-		padding-left: 32px;
-		padding-right: 32px;
+		height: 85vh;
+		padding-left: 16px;
+		padding-right: 16px;
 	}
 }
 
