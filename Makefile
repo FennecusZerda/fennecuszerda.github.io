@@ -5,7 +5,7 @@ install:
 	cd scripts && npm install --save-dev
 
 build: source
-	find ./swift -name "*.swift" -maxdepth 1 | xargs swiftc -o main
+	find ./swift -name "*.swift" -maxdepth 1 | xargs xcrun swiftc -o main
 
 run: build
 	./main

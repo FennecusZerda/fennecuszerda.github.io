@@ -38,6 +38,7 @@ public struct Component {
 					.default
 					.contentsOfDirectory(at: sourcePath, includingPropertiesForKeys: nil)
 					.filter { !$0.isDirectory }
+					.sorted { $0.lastPathComponent.lowercased() < $1.lastPathComponent.lowercased() }
 
 				let images = contents.replace(
 					key: "images", 
