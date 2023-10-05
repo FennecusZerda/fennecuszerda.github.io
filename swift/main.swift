@@ -103,7 +103,7 @@ do {
 
 	print("Copying Images")
 	for directory in try FileManager.default.subpathsOfDirectory(atPath: imageDir.path())
-	where !imageDir.appending(path: directory).isDirectory {
+	where !imageDir.appending(path: directory).isDirectory && !directory.contains(".DS_Store") {
 		let path = imageDir.appending(path: directory)
 		if !FileManager.default.fileExists(atPath: imageOutDir.appending(component: path.lastPathComponent).path) {
 			try FileManager.default.copyItem(at: path, to: imageOutDir.appending(component: path.lastPathComponent))

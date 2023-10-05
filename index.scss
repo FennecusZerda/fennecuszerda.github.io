@@ -47,7 +47,7 @@ $navbar-dropdown-offset: 0px;
 
 .image {
 	max-width: 85vw;
-	max-height: 90vh;
+	max-height: 80vh;
 	width: auto;
 	height: auto;
 	margin-left: auto;
@@ -57,6 +57,7 @@ $navbar-dropdown-offset: 0px;
 	justify-content: center;
 
 	@include touch {
+		max-height: 85vh;
 		padding-left: 1.9rem;
 		padding-right: 1.9rem;
 	}

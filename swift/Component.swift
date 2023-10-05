@@ -37,7 +37,7 @@ public struct Component {
 				let imagePaths = try FileManager
 					.default
 					.contentsOfDirectory(at: sourcePath, includingPropertiesForKeys: nil)
-					.filter { !$0.isDirectory }
+					.filter { !$0.isDirectory && $0.lastPathComponent != ".DS_Store" }
 					.sorted { $0.lastPathComponent.lowercased() < $1.lastPathComponent.lowercased() }
 
 				let images = contents.replace(
