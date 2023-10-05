@@ -105,7 +105,9 @@ do {
 	for directory in try FileManager.default.subpathsOfDirectory(atPath: imageDir.path())
 	where !imageDir.appending(path: directory).isDirectory {
 		let path = imageDir.appending(path: directory)
-		try FileManager.default.copyItem(at: path, to: imageOutDir.appending(component: path.lastPathComponent))
+		if !FileManager.default.fileExists(atPath: imageOutDir.appending(component: path.lastPathComponent).path) {
+			try FileManager.default.copyItem(at: path, to: imageOutDir.appending(component: path.lastPathComponent))
+		}
 	}
 
 	print("Copying Favicon")
