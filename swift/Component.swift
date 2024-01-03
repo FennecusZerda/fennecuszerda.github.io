@@ -53,6 +53,24 @@ public struct Component {
 				let image = imageString(for: imagePath, active: true)
 				string.replaceSubrange(match.range, with: image)
 			}
+		} else if key == "images-dynamic" && FileManager.default.fileExists(atPath: imageDir.appending(component: pageName).path) {
+			for match in string.matches(of: regex).reversed() {
+				let args = match.output.1?.split(separator: ".") ?? []
+				let argString = (args.isEmpty ? "" : "/") + args.joined(separator: "/")
+				let sourcePath = imageDir.appending(path: pageName + argString)
+
+				let imagePaths = try FileManager
+					.default
+					.contentsOfDirectory(at: sourcePath, includingPropertiesForKeys: nil)
+					.filter { !$0.isDirectory && $0.lastPathComponent != ".DS_Store" }
+					.sorted { $0.lastPathComponent.lowercased() < $1.lastPathComponent.lowercased() }
+
+				let images = contents.replace(
+					key: "images", 
+					with: imagePaths.map { imageString(for: $0) }.joined()
+				)
+				string.replaceSubrange(match.range, with: images)
+			}
 		} else {
 			string.replaceInSelf(key: self.key, with: self.contents)
 		}

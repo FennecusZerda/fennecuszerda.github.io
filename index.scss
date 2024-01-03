@@ -35,6 +35,23 @@ $navbar-dropdown-offset: 0px;
 
 		line-height: 1.5;
 	}
+
+	hr {
+		@extend .container;
+		margin-top: 64px;
+		margin-bottom: 64px;
+
+		@include touch {
+			margin-left: 32px;
+			margin-right: 32px;
+			margin-top: 32px;
+			margin-bottom: 32px;
+		}
+
+		@include desktop {
+			max-width: 850px !important;
+		}
+	}
 }
 
 .navbar-link:not(.is-arrowless)::after {
@@ -69,12 +86,16 @@ $navbar-dropdown-offset: 0px;
 	display: none;
 }
 
-.image-container {
+.image-container-dynamic {
 	@extend .container;
 	@extend .is-fluid;
 	cursor: grab;
 	align-items: center;
 	display: flex;
+}
+
+.image-container {
+	@extend .image-container-dynamic;
 	height: 80vh;
 
 	@include touch {

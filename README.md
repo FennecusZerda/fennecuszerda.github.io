@@ -113,3 +113,8 @@ images/
 		solo_images/my-cool-image.jpg <- Will not be on any carosels
 		baseball/ <- All the baseball carosel images
 ```
+
+## To push an update
+
+- Run `make run` to compile and run the build script
+-  

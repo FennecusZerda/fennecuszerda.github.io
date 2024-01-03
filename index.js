@@ -41,4 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.getElementsByClassName("image-container").forEach((container) => {
 		startSlideshow(container);
 	});
+
+	document.getElementsByClassName("image-container-dynamic").forEach((container) => {
+		startSlideshow(container);
+	});
 });
