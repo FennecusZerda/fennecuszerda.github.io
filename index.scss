@@ -17,49 +17,11 @@ $navbar-dropdown-offset: 0px;
 
 @import "./bulma/bulma.sass";
 
-.page-content {
-	.content {
-		@extend .container;
-
-		@include touch {
-			padding-left: 32px;
-			padding-right: 32px;
-		}
-
-		@include desktop {
-			max-width: 850px !important;
-		}
-
-		padding-top: 32px;
-		padding-bottom: 32px;
-
-		line-height: 1.5;
-	}
-
-	hr {
-		@extend .container;
-		margin-top: 64px;
-		margin-bottom: 64px;
-
-		@include touch {
-			margin-left: 32px;
-			margin-right: 32px;
-			margin-top: 32px;
-			margin-bottom: 32px;
-		}
-
-		@include desktop {
-			max-width: 850px !important;
-		}
-	}
-}
-
-.navbar-link:not(.is-arrowless)::after {
-	border: 1px solid $black;
-	border-radius: 1px;
-	margin-top: -0.4375em;
-	border-right: 0;
-	border-top: 0;
+.image-container-base {
+	@extend .container;
+	cursor: grab;
+	align-items: center;
+	display: flex;
 }
 
 .image {
@@ -86,16 +48,9 @@ $navbar-dropdown-offset: 0px;
 	display: none;
 }
 
-.image-container-dynamic {
-	@extend .container;
-	@extend .is-fluid;
-	cursor: grab;
-	align-items: center;
-	display: flex;
-}
-
 .image-container {
-	@extend .image-container-dynamic;
+	@extend .image-container-base;
+	@extend .is-fluid;
 	height: 80vh;
 
 	@include touch {
@@ -126,4 +81,80 @@ $navbar-dropdown-offset: 0px;
 
 .image-controls:hover {
 	stroke: rgb(0, 0, 0);
+}
+
+.page-content {
+	.content {
+		@extend .container;
+
+		@include touch {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
+
+		@include desktop {
+			max-width: 850px !important;
+		}
+
+		padding-top: 32px;
+		padding-bottom: 32px;
+
+		line-height: 1.5;
+	}
+
+	.content:last-child {
+		@include touch {
+			padding-bottom: 0px;
+		}
+	}
+
+	.image-container-dynamic {
+		@extend .image-container-base;
+
+		@include touch {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
+
+		@include desktop {
+			max-width: 850px !important;
+		}
+
+		padding-top: 32px;
+		padding-bottom: 32px;
+
+		.image {
+			@extend .image;
+			max-width: 80%;
+		}
+
+		.image-controls.forward {
+			@extend .image-controls, .forward;
+			@include desktop {
+				right: 0px;
+			}
+		}
+	}
+
+	hr {
+		@extend .container;
+
+		@include touch {
+			margin-left: 32px;
+			margin-right: 32px;
+			margin-bottom: 32px;
+		}
+
+		@include desktop {
+			max-width: 850px !important;
+		}
+	}
+}
+
+.navbar-link:not(.is-arrowless)::after {
+	border: 1px solid $black;
+	border-radius: 1px;
+	margin-top: -0.4375em;
+	border-right: 0;
+	border-top: 0;
 }
