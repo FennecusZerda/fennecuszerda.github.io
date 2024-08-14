@@ -2,7 +2,7 @@ source:
 	@mkdir -p swift
 
 install:
-	cd scripts && npm install --save-dev
+	./install.sh
 
 build: source
 	find ./swift -name "*.swift" -maxdepth 1 | xargs xcrun swiftc -o main
@@ -14,4 +14,4 @@ deploy: run
 	zip -r build.zip build
 
 clean:
-	rm -r ./main ./build
+	rm -rf ./main ./build ./bulma ./scripts/node_modules

@@ -1,7 +1,9 @@
 @charset "utf-8";
 
+@use "./bulma/sass/utilities/mixins";
 @import url("https://use.typekit.net/gag2ulb.css");
 
+@import "./bulma/bulma.scss";
 @import "./bulma/sass/utilities/initial-variables";
 @import "./bulma/sass/utilities/functions";
 
@@ -12,10 +14,9 @@ $family-primary: $aktiv;
 
 $navbar-dropdown-arrow: $black;
 $navbar-dropdown-border-top: 0px;
-$navbar-dropdown-radius: 3px;
+$navbar-dropdown-radius: 0px;
 $navbar-dropdown-offset: 0px;
-
-@import "./bulma/bulma.sass";
+$navbar-box-shadow-color: rgba(0, 0, 0, 0);
 
 .image-container-base {
 	@extend .container;
@@ -33,7 +34,7 @@ $navbar-dropdown-offset: 0px;
 	align-items: center;
 	justify-content: center;
 
-	@include touch {
+	@include mixins.touch {
 		max-height: 85vh;
 		padding-left: 1.9rem;
 		padding-right: 1.9rem;
@@ -53,7 +54,7 @@ $navbar-dropdown-offset: 0px;
 	@extend .is-fluid;
 	height: 80vh;
 
-	@include touch {
+	@include mixins.touch {
 		height: 85vh;
 		padding-left: 16px;
 		padding-right: 16px;
@@ -71,10 +72,10 @@ $navbar-dropdown-offset: 0px;
 }
 
 .image-controls.forward {
-	@include touch {
+	@include mixins.touch {
 		right: 1.5rem;
 	}
-	@include desktop {
+	@include mixins.desktop {
 		right: 32px;
 	}
 }
@@ -85,43 +86,43 @@ $navbar-dropdown-offset: 0px;
 
 .page-content {
 	.content {
-		@extend .container;
-
-		@include touch {
-			padding-left: 32px;
-			padding-right: 32px;
-		}
-
-		@include desktop {
-			max-width: 850px !important;
-		}
-
 		padding-top: 32px;
 		padding-bottom: 32px;
 
 		line-height: 1.5;
+
+		@extend .container;
+
+		@include mixins.touch {
+			padding-left: 32px;
+			padding-right: 32px;
+		}
+
+		@include mixins.desktop {
+			max-width: 850px !important;
+		}
 	}
 
 	.content:last-child {
-		@include touch {
+		@include mixins.touch {
 			padding-bottom: 0px;
 		}
 	}
 
 	.image-container-dynamic {
+		padding-top: 32px;
+		padding-bottom: 32px;
+
 		@extend .image-container-base;
 
-		@include touch {
+		@include mixins.touch {
 			padding-left: 32px;
 			padding-right: 32px;
 		}
 
-		@include desktop {
+		@include mixins.desktop {
 			max-width: 850px !important;
 		}
-
-		padding-top: 32px;
-		padding-bottom: 32px;
 
 		.image {
 			@extend .image;
@@ -130,7 +131,7 @@ $navbar-dropdown-offset: 0px;
 
 		.image-controls.forward {
 			@extend .image-controls, .forward;
-			@include desktop {
+			@include mixins.desktop {
 				right: 0px;
 			}
 		}
@@ -139,13 +140,13 @@ $navbar-dropdown-offset: 0px;
 	hr {
 		@extend .container;
 
-		@include touch {
+		@include mixins.touch {
 			margin-left: 32px;
 			margin-right: 32px;
 			margin-bottom: 32px;
 		}
 
-		@include desktop {
+		@include mixins.desktop {
 			max-width: 850px !important;
 		}
 	}
