@@ -7,7 +7,7 @@ public struct Component {
 	
 	init(key: String) throws {
 		self.key = key
-		self.contents = try String(contentsOf: componentsDir.appending(component: key + ".html"))
+		self.contents = try String(contentsOf: componentsDir.appending(component: key + ".html"), encoding: .utf8)
 	}
 
 	func findAndReplace(in string: inout String, pageName: String) throws {

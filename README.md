@@ -56,13 +56,13 @@ To add that generated HTML to the page, add the following:
 
 There are two ways to embed images in your site.
 
-1. Use a carosel (this is the best one)
+1. Use a carousel (this is the best one)
 
-You can add an image carosel by adding the following to your page file: `{{images}}`.
-This will create a carosel with _every_ image in the images/pagename folder.
+You can add an image carousel by adding the following to your page file: `{{images}}`.
+This will create a carousel with _every_ image in the images/pagename folder.
 
-If you want to have more than one carosel in your page, you can add subfolders to your page's image folder.
-For instance say I want two carosels in my `sports` page, one for `baseball` and one for `basketball`. You can create a folder of images for each carosel like so:
+If you want to have more than one carousel in your page, you can add subfolders to your page's image folder.
+For instance say I want two carousels in my `sports` page, one for `baseball` and one for `basketball`. You can create a folder of images for each carosel like so:
 
 ```
 images/
@@ -116,5 +116,5 @@ images/
 
 ## To push an update
 
-- Run `make run` to compile and run the build script
--  
+-   Run `make run` to compile and run the build script
+-

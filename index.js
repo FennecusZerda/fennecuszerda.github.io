@@ -46,3 +46,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		startSlideshow(container);
 	});
 });
+
+function updateThemeColor() {
+	const themeColorMetaTag = document.getElementById("theme-color-meta");
+	if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+		themeColorMetaTag.setAttribute("content", "#14161c"); // Dark mode color
+	} else {
+		themeColorMetaTag.setAttribute("content", "#ffffff"); // Light mode color
+	}
+}
+
+updateThemeColor();
+
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", updateThemeColor);

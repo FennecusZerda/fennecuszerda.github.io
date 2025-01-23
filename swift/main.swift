@@ -21,12 +21,14 @@ let cssDir = URL(filePath: "./index.scss")
 let jsDir = URL(filePath: "./index.js")
 let componentsDir = URL(filePath: "./components/")
 let imageDir = URL(filePath: "./images/")
+let pdfsDir = URL(filePath: "./pdfs")
 let faviconDir = URL(filePath: "./favicon/")
 
 let outputDir = URL(filePath: "./build/")
 let cssOutDir = URL(filePath: "./build/css/")
 let jsOutDir = URL(filePath: "./build/js/")
 let imageOutDir = URL(filePath: "./build/img/")
+let pdfsOutDir = URL(filePath: "./build/pdfs/")
 let faviconOutDir = URL(filePath: "./build/favicon/")
 
 let htmlMinifyPath = "./scripts/node_modules/html-minifier/cli.js"
@@ -54,8 +56,8 @@ do {
 	print("Setup output dir")
 
 	// Get base HTML contents
-	var baseHTML = try String(contentsOf: URL(filePath: "./base.html"))
-	let baseJS = try String(contentsOf: jsDir)
+	var baseHTML = try String(contentsOf: URL(filePath: "./base.html"), encoding: .utf8)
+	let baseJS = try String(contentsOf: jsDir, encoding: .utf8)
 
 	// Setup CSS & JS Output Dirs
 	try cleanCreateDir(cssOutDir)
@@ -110,6 +112,12 @@ do {
 		}
 	}
 
+	print("Copying PDFs")
+	if FileManager.default.fileExists(atPath: pdfsOutDir.path()) {
+		try FileManager.default.removeItem(at: pdfsOutDir)
+	}
+	try FileManager.default.copyItem(at: pdfsDir, to: pdfsOutDir)
+
 	print("Copying Favicon")
 	try FileManager.default.copyItem(at: faviconDir, to: faviconOutDir)
 
@@ -124,7 +132,7 @@ do {
 		.compactMap { try? Component(key: $0) }
 
 	for page in try FileManager.default.contentsOfDirectory(at: pagesDir, includingPropertiesForKeys: nil) {
-		var pageContents = try String(contentsOf: page)
+		var pageContents = try String(contentsOf: page, encoding: .utf8)
 		pageContents = "<div class=\"page-content\">" + pageContents + "</div>"
 		var pageHTML = baseHTML.replace(key: .body, with: pageContents)
 

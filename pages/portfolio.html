@@ -1,0 +1,82 @@
+<div id="pdf-container"></div>
+<div style="height: 95px"></div>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.min.js"
+	integrity="sha512-Z8CqofpIcnJN80feS2uccz+pXWgZzeKxDsDNMD/dJ6997/LSRY+W4NmEt9acwR+Gt9OHN0kkI1CTianCwoqcjQ=="
+	crossorigin="anonymous"
+	referrerpolicy="no-referrer"
+></script>
+<script>
+	// Path to PDF
+	const pdfUrl = "/pdfs/2025 Interior Design & Photography Portfolio.pdf";
+
+	// PDF.js setup
+	const pdfjsLib = window["pdfjs-dist/build/pdf"];
+	pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js";
+
+	// The container for the PDF pages
+	const pdfContainer = document.getElementById("pdf-container");
+
+	// Load and render the PDF
+	pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
+		const totalPages = pdf.numPages;
+
+		// Create page containers (with visibility hidden initially)
+		for (let i = 1; i <= totalPages; i++) {
+			const pageCanvas = document.createElement("canvas");
+			pageCanvas.className = "pdf-page";
+			pdfContainer.appendChild(pageCanvas);
+		}
+
+		let currentPage = 1;
+		const pageRenderLimit = 3; // Render 3 pages simultaneously
+
+		// Function to render a page
+		function renderPage(pageNum) {
+			pdf.getPage(pageNum).then((page) => {
+				const canvas = pdfContainer.children[pageNum - 1];
+				const context = canvas.getContext("2d");
+
+				const scale = 1.5;
+				const viewport = page.getViewport({ scale: scale });
+
+				canvas.width = viewport.width;
+				canvas.height = viewport.height;
+
+				page.render({
+					canvasContext: context,
+					viewport: viewport,
+				}).promise.finally(() => {
+					canvas.style.visibility = "visible";
+				});
+			});
+		}
+
+		// Function to render multiple pages in parallel
+		function renderPagesInBatch(startPage, endPage) {
+			const pagePromises = [];
+			for (let i = startPage; i <= endPage; i++) {
+				pagePromises.push(renderPage(i));
+			}
+			return Promise.all(pagePromises);
+		}
+
+		// Function to load pages lazily when needed (on scroll or a set timeout)
+		function lazyLoadPages() {
+			const pageCount = pdf.numPages;
+			const pagesToRender = Math.min(currentPage + pageRenderLimit, pageCount);
+
+			renderPagesInBatch(currentPage, pagesToRender).then(() => {
+				currentPage = pagesToRender + 1;
+				if (currentPage <= pageCount) {
+					// If there are more pages, set up the next batch
+					requestAnimationFrame(lazyLoadPages);
+				}
+			});
+		}
+
+		// Start rendering the first few pages
+		lazyLoadPages();
+	});
+</script>

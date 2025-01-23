@@ -17,6 +17,48 @@ $navbar-dropdown-border-top: 0px;
 $navbar-dropdown-radius: 0px;
 $navbar-dropdown-offset: 0px;
 $navbar-box-shadow-color: rgba(0, 0, 0, 0);
+$navbar-dropdown-radius: 0;
+$navbar-dropdown-border-style: none;
+
+button {
+	cursor: pointer;
+	font: inherit;
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	outline: inherit;
+}
+
+.navbar-dropdown {
+	padding-top: 0;
+	padding-bottom: 0;
+	border-top-style: none;
+}
+
+.navbar-burger {
+	transition: transform 0.1s ease !important;
+	background-color: var(--bulma-navbar-background-color);
+
+	span {
+		transition: transform 0.1s !important;
+		background-color: var(--bulma-navbar-item-color);
+	}
+}
+
+.navbar-burger:hover {
+	background-color: var(--bulma-navbar-background-color);
+	span {
+		background-color: var(--bulma-navbar-item-color);
+	}
+}
+
+.navbar-burger.is-active {
+	background-color: var(--bulma-navbar-background-color);
+	span {
+		background-color: var(--bulma-navbar-item-color);
+	}
+}
 
 .image-container-base {
 	@extend .container;
@@ -69,6 +111,10 @@ $navbar-box-shadow-color: rgba(0, 0, 0, 0);
 	transition: 0.3s ease;
 	stroke: rgb(58, 58, 58);
 	width: 1.75rem;
+
+	@media (prefers-color-scheme: dark) {
+		stroke: white;
+	}
 }
 
 .image-controls.forward {
@@ -82,6 +128,10 @@ $navbar-box-shadow-color: rgba(0, 0, 0, 0);
 
 .image-controls:hover {
 	stroke: rgb(0, 0, 0);
+
+	@media (prefers-color-scheme: dark) {
+		stroke: rgb(219, 219, 219);
+	}
 }
 
 .page-content {
@@ -153,9 +203,36 @@ $navbar-box-shadow-color: rgba(0, 0, 0, 0);
 }
 
 .navbar-link:not(.is-arrowless)::after {
-	border: 1px solid $black;
+	border: 1px solid #000;
 	border-radius: 1px;
 	margin-top: -0.4375em;
 	border-right: 0;
 	border-top: 0;
+
+	@media (prefers-color-scheme: dark) {
+		border: 1px solid #fff;
+		border-radius: 1px;
+		margin-top: -0.4375em;
+		border-right: 0;
+		border-top: 0;
+	}
+}
+
+.darkmodesvg {
+	fill: var(--bulma-navbar-item-color);
+}
+
+#pdf-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	width: 80%;
+	margin-left: 10%;
+}
+
+.pdf-page {
+	width: 100%;
+	height: auto;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
